@@ -1,0 +1,80 @@
+﻿@model IEnumerable<NumizmatDictionary.Models.Coins>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Список монет</h1>
+
+<p>
+    <a asp-action="Create">Добавить список</a>
+</p>
+
+<form asp-controller="Coins" asp-action="Index">
+    <p>
+        Поиск: <input type="text" name="SearchString">
+        <input type="submit" value="Фильтр" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CoinsName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FaceValue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MetalOrAlloy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfCoins)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Features)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CoinsName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FaceValue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MetalOrAlloy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfCoins)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Features)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Детали</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

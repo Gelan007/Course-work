@@ -1,0 +1,61 @@
+﻿@model IEnumerable<NumizmatDictionary.Models.Collectors>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Список коллекционеров</h1>
+
+<p>
+    <a asp-action="Create">Добавить список</a>
+</p>
+
+<form asp-controller="Collectors" asp-action="Index">
+    <p>
+        Поиск: <input type="text" name="SearchString">
+        <input type="submit" value="Фильтр" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contacts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AvailabilityInCollection)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Contacts)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AvailabilityInCollection)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Детали</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

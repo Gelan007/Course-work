@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumizmatDictionary", "NumizmatDictionary.csproj", "{A79B4477-06FB-4E12-927D-B9F042583259}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A79B4477-06FB-4E12-927D-B9F042583259}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A79B4477-06FB-4E12-927D-B9F042583259}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A79B4477-06FB-4E12-927D-B9F042583259}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A79B4477-06FB-4E12-927D-B9F042583259}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E4853B09-074D-4EC3-B7BA-8CAFA0C515FE}
+	EndGlobalSection
+EndGlobal
