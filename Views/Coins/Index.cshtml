@@ -7,16 +7,15 @@
 <h1>Список монет</h1>
 
 <p>
-    <a asp-action="Create">Добавить список</a>
+    <a asp-action="Create"><button type="button" class="btn btn-primary">Добавить список</button></a>
 </p>
 
 <form asp-controller="Coins" asp-action="Index">
     <p>
         Поиск: <input type="text" name="SearchString">
-        <input type="submit" value="Фильтр" />
+        <button type="submit" class="btn btn-success">Фильтр</button>
     </p>
 </form>
-
 <table class="table">
     <thead>
         <tr>
@@ -70,9 +69,9 @@
                     @Html.DisplayFor(modelItem => item.Features)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Детали</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id"><button type="submit" class="btn btn-success" id="editt">Редактировать</button></a> 
+                    <a asp-action="Details" asp-route-id="@item.Id"><button type="button" class="btn btn-secondary" id="detailss">Детали</button></a> 
+                    <a asp-action="Delete" asp-route-id="@item.Id"><button type="button" class="btn btn-danger" id="deletee">Удалить</button></a>
                 </td>
             </tr>
         }
