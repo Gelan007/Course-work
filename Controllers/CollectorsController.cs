@@ -144,10 +144,45 @@ namespace NumizmatDictionary.Controllers
             return _context.Collectors.Any(e => e.Id == id);
         }
 
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string searchString, string sortOrder)
         {
             var collectors = from m in _context.Collectors
                         select m;
+
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.CountrySortParm = sortOrder == "Country" ? "country_desc" : "Country";
+
+            ViewBag.ContactsSortParm = sortOrder == "Contacts" ? "contacts_desc" : "Contacts";
+
+            ViewBag.AvailabilityInCollectionSortParm = sortOrder == "AvailabilityInCollection" ? "availabilityInCollection_desc" : "AvailabilityInCollection";
+
+      
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    collectors = collectors.OrderByDescending(m => m.Name);
+                    break;
+                case "Country":
+                    collectors = collectors.OrderBy(m => m.Country);
+                    break;
+                case "country_desc":
+                    collectors = collectors.OrderByDescending(m => m.Country);
+                    break;
+                case "Contacts":
+                    collectors = collectors.OrderBy(m => m.Contacts);
+                    break;
+                case "contacts_desc":
+                    collectors = collectors.OrderByDescending(m => m.Contacts);
+                    break;
+                case "AvailabilityInCollection":
+                    collectors = collectors.OrderBy(m => m.AvailabilityInCollection);
+                    break;              
+                default:
+                    collectors = collectors.OrderBy(m => m.Name);
+                    break;
+            }
+
 
             if (!String.IsNullOrEmpty(searchString))
             {

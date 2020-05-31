@@ -19,8 +19,9 @@ namespace NumizmatDictionary.Models
         [DisplayName("Страна")]
         public string Country { get; set; }
 
-        [DisplayName("Номинал")]
+        [DisplayName("Стоимость")]
         public string FaceValue { get; set; }
+        [RegularExpression("[1-9]{1}[0-9]{0,}", ErrorMessage = "Введите число больше нуля")]
 
         [DisplayName("Год выпуска")]
         public string Year { get; set; }

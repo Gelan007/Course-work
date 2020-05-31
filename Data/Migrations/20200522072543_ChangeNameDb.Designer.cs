@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NumizmatDictionary.Data;
 
 namespace NumizmatDictionary.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200522072543_ChangeNameDb")]
+    partial class ChangeNameDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -243,9 +245,6 @@ namespace NumizmatDictionary.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NumberOfCoins")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Values")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Year")

@@ -144,16 +144,79 @@ namespace NumizmatDictionary.Controllers
             return _context.Coins.Any(e => e.Id == id);
         }
 
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string searchString, string sortOrder)
         {
             var coins = from m in _context.Coins
                         select m;
 
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.CountrySortParm = sortOrder == "Country" ? "country_desc" : "Country";
+
+            ViewBag.FaceValueSortParm = sortOrder == "FaceValue" ? "faceValue_desc" : "FaceValue";
+
+            ViewBag.ValuesSortParm = sortOrder == "Values" ? "values_desc" : "values";
+
+            ViewBag.YearSortParm = sortOrder == "Year" ? "year_desc" : "Year";
+
+            ViewBag.MetalOrAlloySortParm = sortOrder == "MetalOrAlloy" ? "metalOrAlloy_desc" : "MetalOrAlloy";
+
+            ViewBag.NumberOfCoinsSortParm = sortOrder == "NumberOfCoins" ? "numberOfCoins_desc" : "NumberOfCoins";
+
+            ViewBag.FeaturesSortParm = sortOrder == "Features" ? "features_desc" : "Features";
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    coins = coins.OrderByDescending(m => m.CoinsName);
+                    break;
+                case "Country":
+                    coins = coins.OrderBy(m => m.Country);
+                    break;
+                case "country_desc":
+                    coins = coins.OrderByDescending(m => m.Country);
+                    break;
+                case "FaceValue":
+                    coins = coins.OrderBy(m => m.FaceValue);
+                    break;
+                case "faceValue_desc":
+                    coins = coins.OrderByDescending(m => m.FaceValue);
+                    break;
+                case "Year":
+                    coins = coins.OrderBy(m => m.Year);
+                    break;
+                case "year_desc":
+                    coins = coins.OrderByDescending(m => m.Year);
+                    break;
+                case "MetalOrAlloy":
+                    coins = coins.OrderBy(m => m.MetalOrAlloy);
+                    break;
+                case "metalOrAlloy_desc":
+                    coins = coins.OrderByDescending(m => m.MetalOrAlloy);
+                    break;
+                case "NumberOfCoins":
+                    coins = coins.OrderBy(m => m.NumberOfCoins);
+                    break;
+                case "numberOfCoins_desc":
+                    coins = coins.OrderByDescending(m => m.NumberOfCoins);
+                    break;
+                case "Features":
+                    coins = coins.OrderBy(m => m.Features);
+                    break;
+                case "features_desc":
+                    coins = coins.OrderByDescending(m => m.Features);
+                    break;
+
+                default:
+                    coins = coins.OrderBy(m => m.CoinsName);
+                    break;
+            }
+
             if (!String.IsNullOrEmpty(searchString))
             {
-                coins = coins.Where(s => s.Country.Contains(searchString) || s.FaceValue.Contains(searchString) || s.MetalOrAlloy.Contains(searchString) || s.Features.Contains(searchString) || s.Year.Contains(searchString) || s.NumberOfCoins.Contains(searchString) || s.CoinsName.Contains(searchString));
+                coins = coins.Where(m => m.Country.Contains(searchString) || m.FaceValue.Contains(searchString) || m.MetalOrAlloy.Contains(searchString) || m.Features.Contains(searchString) || m.Year.Contains(searchString) || m.NumberOfCoins.Contains(searchString) || m.CoinsName.Contains(searchString));
             }
             return View(await coins.ToListAsync());
+
         }
     }
 }

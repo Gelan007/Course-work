@@ -7,43 +7,44 @@
 <h1>Список монет</h1>
 
 <p>
-    <a asp-action="Create"><button type="button" class="btn btn-primary">Добавить список</button></a>
+    <a asp-action="Create"><button type="button" class="btn btn-primary">Добавить монету</button></a>
 </p>
 
 <form asp-controller="Coins" asp-action="Index">
     <p>
         Поиск: <input type="text" name="SearchString">
-        <button type="submit" class="btn btn-success">Фильтр</button>
+        <button type="submit" class="btn btn-success">Искать</button>
     </p>
 </form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CoinsName)
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.CoinsName), "Index", new { sortOrder = ViewBag.NameSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Country)
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.Country), "Index", new { sortOrder = ViewBag.CountrySortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FaceValue)
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.FaceValue), "Index", new { sortOrder = ViewBag.FaceValueSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Year)
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.Year), "Index", new { sortOrder = ViewBag.YearSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MetalOrAlloy)
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.MetalOrAlloy), "Index", new { sortOrder = ViewBag.MetalOrAlloySortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NumberOfCoins)
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.NumberOfCoins), "Index", new { sortOrder = ViewBag.NumberOfCoinsSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Features)
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.Features), "Index", new { sortOrder = ViewBag.FeaturesSortParm })
             </th>
+
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody>       
         @foreach (var item in Model)
         {
             <tr>
@@ -69,8 +70,8 @@
                     @Html.DisplayFor(modelItem => item.Features)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id"><button type="submit" class="btn btn-success" id="editt">Редактировать</button></a> 
-                    <a asp-action="Details" asp-route-id="@item.Id"><button type="button" class="btn btn-secondary" id="detailss">Детали</button></a> 
+                    <a asp-action="Edit" asp-route-id="@item.Id"><button type="submit" class="btn btn-success" id="editt">Редактировать</button></a>
+                    <a asp-action="Details" asp-route-id="@item.Id"><button type="button" class="btn btn-secondary" id="detailss">Детали</button></a>
                     <a asp-action="Delete" asp-route-id="@item.Id"><button type="button" class="btn btn-danger" id="deletee">Удалить</button></a>
                 </td>
             </tr>

@@ -13,24 +13,26 @@
 <form asp-controller="Collectors" asp-action="Index">
     <p>
         Поиск: <input type="text" name="SearchString">
-               <button type="submit" class="btn btn-success">Фильтр</button>
+               <button type="submit" class="btn btn-success">Искать</button>
     </p>
 </form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Country)
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.Name), "Index", new { sortOrder = ViewBag.NameSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.ActionLink(Html.DisplayNameFor(model => model.Country), "Index", new { sortOrder = ViewBag.CountrySortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Contacts)
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.Contacts), "Index", new { sortOrder = ViewBag.ContactsSortParm })
+                
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AvailabilityInCollection)
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.AvailabilityInCollection), "Index", new { sortOrder = ViewBag.AvailabilityInCollectionSortParm })
             </th>
+        
             <th></th>
         </tr>
     </thead>
