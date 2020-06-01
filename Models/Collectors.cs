@@ -17,12 +17,15 @@ namespace NumizmatDictionary.Models
         [DisplayName("Страна")]
         public string Country { get; set; }
 
+        [Required]
         [DisplayName("Имя")]
         public string Name { get; set; }
 
+        [Required]
         [DisplayName("Контактные координаты")]
         public string Contacts { get; set; }
 
+        [Required]
         [DisplayName("Наличие редких монет в коллекции")]
         public string AvailabilityInCollection { get; set; }
 
