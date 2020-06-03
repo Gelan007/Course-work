@@ -5,59 +5,71 @@
 }
 
 <h1>Список коллекционеров</h1>
+@if (User.Identity.IsAuthenticated)
+{
+    if (User.IsInRole ("Admin"))
+    {
+        <p>
+            <a asp-action="Create"><button type="button" class="btn btn-primary">Добавить список</button></a>
+        </p>
+    }
+}
+        <form asp-controller="Collectors" asp-action="Index">
+            <p>
+                Поиск: <input type="text" name="SearchString">
+                <button type="submit" class="btn btn-success">Искать</button>
+            </p>
+        </form>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.ActionLink(@Html.DisplayNameFor(model => model.Name), "Index", new { sortOrder = ViewBag.NameSortParm })
+                    </th>
+                    <th>
+                        @Html.ActionLink(Html.DisplayNameFor(model => model.Country), "Index", new { sortOrder = ViewBag.CountrySortParm })
+                    </th>
+                    <th>
+                        @Html.ActionLink(@Html.DisplayNameFor(model => model.Contacts), "Index", new { sortOrder = ViewBag.ContactsSortParm })
 
-<p>
-    <a asp-action="Create"><button type="button" class="btn btn-primary">Добавить список</button></a>
-</p>
+                    </th>
+                    <th>
+                        @Html.ActionLink(@Html.DisplayNameFor(model => model.AvailabilityInCollection), "Index", new { sortOrder = ViewBag.AvailabilityInCollectionSortParm })
+                    </th>
 
-<form asp-controller="Collectors" asp-action="Index">
-    <p>
-        Поиск: <input type="text" name="SearchString">
-               <button type="submit" class="btn btn-success">Искать</button>
-    </p>
-</form>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.ActionLink(@Html.DisplayNameFor(model => model.Name), "Index", new { sortOrder = ViewBag.NameSortParm })
-            </th>
-            <th>
-                @Html.ActionLink(Html.DisplayNameFor(model => model.Country), "Index", new { sortOrder = ViewBag.CountrySortParm })
-            </th>
-            <th>
-                @Html.ActionLink(@Html.DisplayNameFor(model => model.Contacts), "Index", new { sortOrder = ViewBag.ContactsSortParm })
-                
-            </th>
-            <th>
-                @Html.ActionLink(@Html.DisplayNameFor(model => model.AvailabilityInCollection), "Index", new { sortOrder = ViewBag.AvailabilityInCollectionSortParm })
-            </th>
-        
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Country)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Contacts)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AvailabilityInCollection)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id"><button type="submit" class="btn btn-success" id="editt">Редактировать</button></a> 
-                    <a asp-action="Details" asp-route-id="@item.Id"><button type="button" class="btn btn-secondary" id="detailss">Детали</button></a> 
-                    <a asp-action="Delete" asp-route-id="@item.Id"><button type="button" class="btn btn-danger" id="deletee">Удалить</button></a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Country)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Contacts)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AvailabilityInCollection)
+                        </td>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (User.IsInRole("Admin"))
+                            {
+                                <td>
+
+                                    <a asp-action="Edit" asp-route-id="@item.Id"><button type="submit" class="btn btn-success" id="editt">Редактировать</button></a>
+                                    <a asp-action="Details" asp-route-id="@item.Id"><button type="button" class="btn btn-secondary" id="detailss">Детали</button></a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id"><button type="button" class="btn btn-danger" id="deletee">Удалить</button></a>
+                                </td>
+                            }
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
