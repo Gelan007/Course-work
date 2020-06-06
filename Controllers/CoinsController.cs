@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,12 +13,16 @@ using NumizmatDictionary.Models;
 
 namespace NumizmatDictionary.Controllers
 {
+    [Authorize]
     public class CoinsController : Controller
-    {
+      
+    { 
         private readonly ApplicationDbContext _context;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public CoinsController(ApplicationDbContext context)
+        public CoinsController(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
         {
+            this.httpContextAccessor = httpContextAccessor;
             _context = context;
         }
 
@@ -40,6 +47,7 @@ namespace NumizmatDictionary.Controllers
         // GET: Coins/Create
         public IActionResult Create()
         {
+            
             return View();
         }
 
@@ -50,6 +58,7 @@ namespace NumizmatDictionary.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,CoinsName,Country,FaceValue,Year,MetalOrAlloy,NumberOfCoins,Features")] Coins coins)
         {
+            coins.UserId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             if (ModelState.IsValid)
             {
                 _context.Add(coins);
@@ -146,7 +155,10 @@ namespace NumizmatDictionary.Controllers
 
         public async Task<IActionResult> Index(string searchString, string sortOrder)
         {
+            var userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+   
             var coins = from m in _context.Coins
+                        where m.UserId == userId
                         select m;
 
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";

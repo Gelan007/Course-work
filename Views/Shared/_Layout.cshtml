@@ -22,10 +22,17 @@
 
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
-                        </li>                    
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Coins" asp-action="Index">Монеты</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (!User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Coins" asp-action="Index">Монеты</a>
+                                </li>
+                            }
+                        }
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Collectors" asp-action="Index">Коллекционеры</a>
                         </li>

@@ -9,6 +9,7 @@ namespace NumizmatDictionary.Models
 {
     public class Coins
     {
+        public string UserId { get; internal set; }
         [Key]
         public int Id { get; set; }
 
